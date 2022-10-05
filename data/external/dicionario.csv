@@ -1,18 +1,18 @@
 variavel,significado,valores,tipo
-gender,Gênero do estudante ,"[""Male"", ""Female""]",Nomial
-NationallTy,Nacionalidade do estudante,"[""Kuwait"", ""Lebanon"", ""Egypt"", ""SaudiArabia"", ""USA"", ""Jordan"", ""Venezuela"","" Iran"",""Tunis"",""Morocco"",""Syria"",""Palestine"",""Iraq"",""Lybia""]",Nomial
-PlaceofBirth,Local de nascimento do estudante,"[""Kuwait"", ""Lebanon"", ""Egypt"", ""SaudiArabia"", ""USA"", ""Jordan"", ""Venezuela"","" Iran"",""Tunis"",""Morocco"",""Syria"",""Palestine"",""Iraq"",""Lybia""]",Nomial
+gender,Gênero do estudante ,"[""Male"", ""Female""]",Nominal
+NationalITy,Nacionalidade do estudante,"[""Kuwait"", ""Lebanon"", ""Egypt"", ""SaudiArabia"", ""USA"", ""Jordan"", ""Venezuela"","" Iran"",""Tunis"",""Morocco"",""Syria"",""Palestine"",""Iraq"",""Lybia""]",Nominal
+PlaceofBirth,Local de nascimento do estudante,"[""Kuwait"", ""Lebanon"", ""Egypt"", ""SaudiArabia"", ""USA"", ""Jordan"", ""Venezuela"","" Iran"",""Tunis"",""Morocco"",""Syria"",""Palestine"",""Iraq"",""Lybia""]",Nominal
 StageID,Nivel educacional do estudante,"[""lowerlevel"", ""MiddleSchool"", ""HighSchool""]",Ordinal
-GradeID,Turma a qual o aluno pertence,"[""G-01"", ""G-02"", ""G-03"", ""G-04"", ""G-05"", ""G-06"", ""G-07"", ""G-08"", ""G-09"", ""G-10"", ""G-11"", ""G-12""]",Nomial
-SectionID,Sala de aula a qual o aluno pertence,"[""A"", ""B"", ""C""]",Nomial
-Topic,Topico do curso,"[""English"", ""Spanish"", ""French"", ""Arabic"", ""IT"", ""Math"", ""Chemistry"", ""Biology"", ""Science"", ""History"", ""Quran"", ""Geology""]",Nomial
+GradeID,Turma a qual o aluno pertence,"[""G-01"", ""G-02"", ""G-03"", ""G-04"", ""G-05"", ""G-06"", ""G-07"", ""G-08"", ""G-09"", ""G-10"", ""G-11"", ""G-12""]",Nominal
+SectionID,Sala de aula a qual o aluno pertence,"[""A"", ""B"", ""C""]",Nominal
+Topic,Topico do curso,"[""English"", ""Spanish"", ""French"", ""Arabic"", ""IT"", ""Math"", ""Chemistry"", ""Biology"", ""Science"", ""History"", ""Quran"", ""Geology""]",Nominal
 Semester,Semestre letivo,"[""First"", ""Second""]",Ordinal
-Relation,Parente responsavel pelo estudante,"[""Mom"", ""Father""]",Nomial
+Relation,Parente responsavel pelo estudante,"[""Mom"", ""Father""]",Nominal
 raisedhands,Quantas vezes o estudante levanta sua mão na sala de aula,[0 - 100],Discreta
 VisITedResources,Quantas vezes o estudante pesquisa o conteudo do curso,[0 - 100],Discreta
 AnnouncementsView,Quantas vezes o estudante verifica as novidades do curso,[0 - 100],Discreta
 Discussion,Quantas vezes o estudante participa de grupo de discurssão,[0 - 100],Discreta
-ParentAnsweringSurvey,O responsavel respondeu as pesquisas fornecidas,"[""Yes"", ""No""]",Nomial
-ParentschoolSatisfaction,Grau de satisfação com as escolas,"[""Good"", ""Bad""]",Nomial
-StudentAbsenceDays,O numero de faltas de cada aluno,"[""above - 7"", ""Under - 7""]",Nomial
+ParentAnsweringSurvey,O responsavel respondeu as pesquisas fornecidas,"[""Yes"", ""No""]",Nominal
+ParentschoolSatisfaction,Grau de satisfação com as escolas,"[""Good"", ""Bad""]",Nominal
+StudentAbsenceDays,O numero de faltas de cada aluno,"[""above - 7"", ""Under - 7""]",Nominal
 Class,Classificação dos alunos com base em sua nota total,"[""Low-Level"", ""Middle-Level"", ""High-Level""]",Ordinal

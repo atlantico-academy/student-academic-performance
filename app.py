@@ -8,17 +8,55 @@ from streamlit_option_menu import option_menu
 
 model = load('models/model.joblib')
 
+
+country_mapping = {
+    "Kuwait": "Kuwait",
+    "Lebanon": "Líbano",
+    "Egypt": "Egito",
+    "SaudiArabia": "Arábia Saudita",
+    "USA": "Estados Unidos",
+    "Jordan": "Jordânia",
+    "Venezuela": "Venezuela",
+    " Iran": "Irã",
+    "Tunis": "Tunísia",
+    "Morocco": "Marrocos",
+    "Syria": "Síria",
+    "Palestine": "Palestina",
+    "Iraq": "Iraque",
+    "Lybia": "Libia"
+}
+
+level_mapping = {
+    "lowerlevel": "Pré escolar",
+    "MiddleSchool": "Ensino fundamental",
+    "HighSchool": "Ensino médio"
+}
+
+topic_mapping = {
+    "English": "Inglês",
+    "Spanish": "Espanhol",
+    "French": "Frances",
+    "Arabic": "Árabe",
+    "IT": "Informática",
+    "Math": "Matemática",
+    "Chemistry": "Química",
+    "Biology": "Biologia",
+    "Science": "Ciências",
+    "History": "História",
+    "Quran": "Religião",
+    "Geology": "Geologia",
+}
+
+
 def main():
 
     with st.sidebar:
         selected = option_menu("Menu", ["Aplicação", 'Sobre nós'], 
-            icons=['house', 'emoji-smile'], menu_icon="cast", default_index=1)
+            icons=['house', 'emoji-smile'], menu_icon="cast", default_index=0)
 
     if selected == 'Aplicação':
     # Título da aplicação
-
-        #st.title("Classificador de desempenho acadêmico")
-        st.markdown("<h1 style='text-align: center; color: white; font-size: 36px;'>Classificador de desempenho acadêmico</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center; font-size: 36px;'>Classificador de desempenho acadêmico</h1>", unsafe_allow_html=True)
         # divisão da entrada em colunas
 
         col1, col2, col3, col4 = st.columns(4)
@@ -28,12 +66,14 @@ def main():
         gender = col1.selectbox( 
             label='Gênero',
             help='Como você se identifica quanto ao gênero?',
+            format_func=lambda x: 'Masculino' if x == 'Male' else 'Feminino',
             options=['Male', 'Female']
         )
 
         NationalITy = col2.selectbox(
             label='Nacionalidade',
             help='Nacionalidade do estudante',
+            format_func=lambda x: country_mapping.get(x),
             options=["Kuwait", "Lebanon", "Egypt", 
              "SaudiArabia", "USA", "Jordan", 
              "Venezuela"," Iran","Tunis",
@@ -44,6 +84,7 @@ def main():
         PlaceofBirth = col3.selectbox(
             label='Naturalidade',
             help='Local de nascimento do estudante',
+            format_func=lambda x: country_mapping.get(x),
             options=["Kuwait", "Lebanon", "Egypt", 
              "SaudiArabia", "USA", "Jordan", 
              "Venezuela"," Iran","Tunis",
@@ -55,6 +96,7 @@ def main():
         StageID = col4.selectbox(
             label='Grau escolar',
             help='Nível escolar do estudante',
+            format_func=lambda x: level_mapping.get(x),
             options=["lowerlevel", "MiddleSchool", "HighSchool"]
         )
 
@@ -78,6 +120,7 @@ def main():
         Topic = col3.selectbox(
             label='Disciplina',
             help='Topico do curso',
+            format_func=lambda x: topic_mapping.get(x),
             options=["English", "Spanish", "French", 
              "Arabic", "IT", "Math", 
              "Chemistry", "Biology", "Science", 
@@ -88,13 +131,15 @@ def main():
         Semester = col4.selectbox(
             label='Semestre',
             help='Semestre letivo',
+            format_func=lambda x: "Primeiro" if x == "F" else "Segundo",
             options=["F", "S"]
         )
 
 
         Relation = col1.selectbox(
             label='Tutor',
-            help='Parente responsavel pelo estudante',
+            help='Parente responsável pelo estudante',
+            format_func=lambda x: "Mãe" if x == "Mom" else "Pai",
             options=["Mom", "Father"]
         )
 
@@ -102,37 +147,42 @@ def main():
         raisedhands = col2.number_input(
             label='Interação do aluno',
             help="Quantas vezes o estudante levanta sua mão na sala de aula?", 
-                        min_value=0, 
-                        max_value=100, 
-                        value=0)
+            min_value=0, 
+            max_value=100, 
+            value=0
+        )
 
 
         VisITedResources = col3.number_input(
             label='Quantidade de pesquisa',
             help="Quantas vezes o estudante pesquisa o conteudo do curso?", 
-                        min_value=0, 
-                        max_value=100, 
-                        value=0)
+            min_value=0, 
+            max_value=100, 
+            value=0
+        )
 
 
         AnnouncementsView = col4.number_input(
             label='Novidades de conteudo',
             help="Quantas vezes o estudante verifica as novidades do curso?", 
-                        min_value=0, 
-                        max_value=100, 
-                        value=0)
+            min_value=0, 
+            max_value=100, 
+            value=0
+        )
 
         Discussion = col1.number_input(
             label='Participação de debates',
             help="Quantas vezes o estudante participa de grupo de discurssão?", 
-                        min_value=0, 
-                        max_value=100, 
-                        value=0)
+            min_value=0, 
+            max_value=100, 
+            value=0
+        )
 
 
         ParentAnsweringSurvey = col2.selectbox(
             label='Participação do tutor',
             help='O responsavel respondeu as pesquisas fornecidas?',
+            format_func=lambda x: "Sim" if x == "Yes" else "Não",
             options=["Yes", "No"]
         )
 
@@ -140,6 +190,7 @@ def main():
         ParentschoolSatisfaction = col3.selectbox(
             label='Nível de satisfação',
             help='Qual o grau de satisfação com as escolas?',
+            format_func=lambda x: "Bom" if x == "Good" else "Ruim",
             options=["Good", "Bad"]
         )
 
@@ -147,32 +198,35 @@ def main():
         StudentAbsenceDays = col4.selectbox(
             label='Faltas do aluno',
             help='O número total de faltas do aluno é?',
+            format_func=lambda x: "Acima de 7" if x == "above - 7" else "Abaixo de 7",
             options=["above - 7", "Under - 7"]
         )
 
         # armazenamento dos inputs
 
-        inputs = {'gender':[gender], 'NationalITy':[NationalITy],
-                 'PlaceofBirth':[PlaceofBirth], 'StageID':[StageID], 
-                 'GradeID':[GradeID], 'SectionID':[SectionID], 
-                 'Topic':[Topic], 'Semester':[Semester], 
-                 'Relation':[Relation], 'raisedhands':[raisedhands], 
-                 'VisITedResources':[VisITedResources], 'AnnouncementsView':[AnnouncementsView],
-                 'Discussion':[Discussion],'ParentschoolSatisfaction':[ParentschoolSatisfaction],
-                 'ParentAnsweringSurvey':[ParentAnsweringSurvey],
-                 'StudentAbsenceDays':[StudentAbsenceDays]
-                }
-
+        inputs = {
+            'gender':[gender], 'NationalITy':[NationalITy],
+            'PlaceofBirth':[PlaceofBirth], 'StageID':[StageID], 
+            'GradeID':[GradeID], 'SectionID':[SectionID], 
+            'Topic':[Topic], 'Semester':[Semester], 
+            'Relation':[Relation], 'raisedhands':[raisedhands], 
+            'VisITedResources':[VisITedResources], 'AnnouncementsView':[AnnouncementsView],
+            'Discussion':[Discussion],'ParentschoolSatisfaction':[ParentschoolSatisfaction],
+            'ParentAnsweringSurvey':[ParentAnsweringSurvey],
+            'StudentAbsenceDays':[StudentAbsenceDays]
+        }
         # conversão em data frame
 
-        df = pd.DataFrame (inputs)
+        df = pd.DataFrame(inputs)
 
         foo = [2, 0, 1]
 
         # Predição
-
-        if st.button('Análise da(o) aluna(o)'):
+        substantivo = 'o aluno' if gender == 'Male' else 'a aluna'
+        if st.button(f'Analisar'):
+            st.write(df)
             result = model.predict_proba(df)
+            st.write(result)
             final_result = foo[result.argmax()]*(1/3)+result.max()/3
             result_ = model.predict(df)
             fig = go.Figure(go.Indicator(
@@ -194,19 +248,15 @@ def main():
                 }
             ))
             st.plotly_chart(fig)
+            
+            
 
-            if result_ == 'L' and gender == 'Male':
-                st.error("A maior probabilidade é que o aluno pertença ao Low Level")
-            elif result_ == 'L' and gender == 'Female':
-                st.info("A maior probabilidade é que a aluna pertença ao Middle Level")
-            elif result_ == 'M' and gender == 'Male':
-                st.info("A maior probabilidade é que o aluno pertença ao Middle Level")
-            elif result_ == 'M' and gender == 'Female':
-                st.info("A maior probabilidade é que a aluna pertença ao Middle Level")
-            elif result_ == 'H' and gender == 'Male':
-                st.info("A maior probabilidade é que o aluno pertença ao High Level")
+            if result_ == 'L':
+                st.error(f"A maior probabilidade é de que {substantivo} tenha um desempenho baixo.")
+            elif result_ == 'M':
+                st.info(f"A maior probabilidade é de que {substantivo} tenha um desempenho mediano.")
             else:
-                st.success("A maior probabilidade é que a aluna pertença ao High Level")
+                st.success(f"A maior probabilidade é que {substantivo} tenha um desempenho alto.")
 
     else:
         st.title('Sobre nós')

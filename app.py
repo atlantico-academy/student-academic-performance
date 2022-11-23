@@ -224,10 +224,10 @@ def main():
         # Predição
         substantivo = 'o aluno' if gender == 'Male' else 'a aluna'
         if st.button(f'Analisar'):
-            st.write(df)
-            result = model.predict_proba(df)
-            st.write(result)
-            final_result = foo[result.argmax()]*(1/3)+result.max()/3
+            result = model.predict_proba(df)[0] 
+            result = result / (result[0] + result[1])
+            final_result = result[0]
+            # final_result = foo[result.argmax()]*(1/3)+result.max()/3
             result_ = model.predict(df)
             fig = go.Figure(go.Indicator(
                 mode = "gauge+number",
@@ -249,11 +249,9 @@ def main():
             ))
             st.plotly_chart(fig)
             
-            
-
-            if result_ == 'L':
+            if final_result <= .3333:
                 st.error(f"A maior probabilidade é de que {substantivo} tenha um desempenho baixo.")
-            elif result_ == 'M':
+            elif final_result <= .66666:
                 st.info(f"A maior probabilidade é de que {substantivo} tenha um desempenho mediano.")
             else:
                 st.success(f"A maior probabilidade é que {substantivo} tenha um desempenho alto.")
